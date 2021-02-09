@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:styles="clr-namespace:HealthApp.Common.Styles"
+    x:Class="HealthApp.Common.Styles.LabelStyles">
+    <ResourceDictionary.MergedDictionaries>
+        <styles:Colors />
+    </ResourceDictionary.MergedDictionaries>
+    <Style
+        x:Key="LabelBase"
+        TargetType="Label">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource SeaGreen}" />
+    </Style>
+    <Style
+        x:Key="Name"
+        TargetType="Label">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource TitleColor}"/>
+        <Setter Property="FontSize"
+                Value="24"/>
+        <Setter
+            Property="FontAttributes"
+            Value="Bold" />
+    </Style>
+    <Style
+        x:Key="Title"
+        TargetType="Label">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource TitleColor}" />
+        <Setter
+            Property="FontSize"
+            Value="20" />
+        <Setter
+            Property="FontAttributes"
+            Value="None" />
+    </Style>
+    <Style x:Key="GoalStyle"
+           TargetType="Label">
+        <Setter Property="TextColor"
+            Value="{StaticResource GoalColor}"/>
+        <Setter Property="FontSize"
+                Value="13"/>
+
+    </Style>
+    <Style
+        x:Key="CompleteStyle"
+        TargetType="Label">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource SeaGreen}" />
+        <Setter
+            Property="FontSize"
+            Value="18" />
+
+    </Style>
+    <Style
+        x:Key="GoalsStyle"
+        TargetType="Label">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource BlackColor}" />
+        <Setter
+            Property="FontSize"
+            Value="18" />
+    </Style>
+    <Style
+        x:Key="SloganStyle"
+        TargetType="Label">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource TitleColor}" />
+        <Setter
+            Property="FontSize"
+            Value="50" />
+        <Setter
+            Property="FontAttributes"
+            Value="Bold" />
+    </Style>
+    <Style
+        x:Key="InputTitleStyle"
+        TargetType="Label">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource BlackColor}" />
+        <Setter
+            Property="FontSize"
+            Value="16" />
+        <Setter
+            Property="Opacity"
+            Value="0.8" />
+    </Style>
+</ResourceDictionary>

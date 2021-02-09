@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthApp.Custom.ButtonInfo">
+    <Frame
+        BackgroundColor="{StaticResource SeaGreen}"
+        Padding="2"
+        CornerRadius="12"
+        WidthRequest="80"
+        HeightRequest="40"
+        Opacity="0.2">
+        
+    </Frame>
+    <Label x:Name="btnTitle"
+           VerticalOptions="CenterAndExpand"
+           HorizontalOptions="CenterAndExpand"
+           Text="{Binding Title}"
+           TextColor="{StaticResource SeaGreen}"
+           FontAttributes="Bold"/>
+    <Grid.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+    </Grid.GestureRecognizers>
+</Grid>

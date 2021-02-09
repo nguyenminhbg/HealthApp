@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HealthApp.Custom.CustomEntry"
+    CornerRadius="6"
+    BackgroundColor="White"
+    Padding="0"
+    x:Name="entryCustom">
+    <Grid
+        ColumnSpacing="0"
+        IsClippedToBounds="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="16" />
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="48" />
+        </Grid.ColumnDefinitions>
+        <ContentView>
+
+        </ContentView>
+        <Entry
+            x:Name="entry"
+            Grid.Column="1"
+            VerticalOptions="Center"
+            Placeholder="{Binding PlaceHold}"
+            FontSize="15"
+            Text="{Binding Text}" />
+        <Image
+            Grid.Column="2"
+            VerticalOptions="Center"
+            HeightRequest="12"
+            Source="{Binding ImageSourceEntry}"
+            x:Name="iconEntry"
+            BackgroundColor="Transparent" />
+
+    </Grid>
+</Frame>

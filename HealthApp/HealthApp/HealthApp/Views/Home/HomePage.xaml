@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HealthApp.Views.Home.HomePage"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:local="clr-namespace:HealthApp.Localization"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:custom="clr-namespace:HealthApp.Custom"
+    xmlns:model="clr-namespace:HealthApp.ViewModels.Home"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
+    BackgroundColor="{StaticResource Background}">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="4*" />
+                <RowDefinition
+                    Height="6*" />
+            </Grid.RowDefinitions>
+            <yummy:PancakeView
+                CornerRadius="0,0,35,35"
+                BackgroundColor="{StaticResource SeaGreen}"
+                Grid.Row="0">
+                <StackLayout
+                    CompressedLayout.IsHeadless="true">
+                    <forms:CachedImage
+                        Margin="4"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="{Binding Account.UrlAvarata}"
+                        HeightRequest="70"
+                        WidthRequest="70"
+                        Aspect="AspectFit" />
+                    <Label
+                        Text="{Binding Account.FullName, StringFormat='Hi, {0}'}"
+                        Style="{StaticResource Name}"
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="4,0,4,4" />
+                    <Label
+                        Text="{Binding Account.Address}"
+                        Style="{StaticResource Title}"
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="4,0,4,4" />
+
+                    <Grid
+                        Margin="12,0,12,12"
+                        VerticalOptions="CenterAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout
+                            HorizontalOptions="CenterAndExpand">
+                            <Label
+                                HorizontalOptions="CenterAndExpand"
+                                LineBreakMode="WordWrap"
+                                Text="{local:Translate weight}"
+                                Style="{StaticResource Title}">
+                            </Label>
+                            <Label
+                                HorizontalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            Text="{Binding Account.Weight}"
+                                            Style="{StaticResource Name}"
+                                            FontAttributes="Bold" />
+                                        <Span
+                                            Style="{StaticResource Title}"
+                                            Text=" kg" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout
+                            Grid.Column="1">
+                            <Label
+                                HorizontalOptions="CenterAndExpand"
+                                LineBreakMode="WordWrap"
+                                Text="{local:Translate height}"
+                                Style="{StaticResource Title}">
+                            </Label>
+                            <Label
+                                HorizontalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            Text="{Binding Account.Height}"
+                                            Style="{StaticResource Name}"
+                                            FontAttributes="Bold" />
+                                        <Span
+                                            Style="{StaticResource Title}"
+                                            Text=" ft" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout
+                            Grid.Column="2">
+                            <Label
+                                HorizontalOptions="CenterAndExpand"
+                                LineBreakMode="WordWrap"
+                                Text="{local:Translate goal}"
+                                Style="{StaticResource Title}">
+                            </Label>
+                            <Label
+                                HorizontalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            Text="{Binding Account.Goal}"
+                                            Style="{StaticResource Name}"
+                                            FontAttributes="Bold" />
+                                        <Span
+                                            Style="{StaticResource Title}"
+                                            Text=" kg" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+
+            </yummy:PancakeView>
+            <StackLayout
+                Grid.Row="1">
+                <CollectionView
+                    x:Name="listEx"
+                    ItemsSource="{Binding Exercises}"
+                    Margin="16"
+                    HeightRequest="110"
+                    VerticalOptions="Center">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            Orientation="Horizontal"
+                            HorizontalItemSpacing="16" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Frame
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    CornerRadius="12"
+                                    BackgroundColor="{StaticResource SeaGreen}"
+                                    HorizontalOptions="CenterAndExpand">
+                                    <forms:CachedImage
+                                        Source="{Binding Url}"
+                                        Aspect="AspectFit" />
+                                    <Frame.Triggers>
+                                        <DataTrigger
+                                            TargetType="Frame"
+                                            Binding="{Binding IsSelectedEx}"
+                                            Value="True">
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="{StaticResource TitleColor}" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={Reference listEx},Path=BindingContext.CmdSelectedItem}"
+                                            CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Frame
+                    Margin="8,0,8,16"
+                    BackgroundColor="{StaticResource TitleColor}"
+                    CornerRadius="35"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                Height="42" />
+                            <RowDefinition
+                                Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="Auto" />
+                                <ColumnDefinition
+                                    Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Text="{local:Translate goals}"
+                                Style="{StaticResource GoalsStyle}"
+                                VerticalOptions="Center" />
+
+                            <Frame
+                                VerticalOptions="Center"
+                                Grid.Column="1"
+                                Padding="4"
+                                HeightRequest="34"
+                                WidthRequest="136"
+                                HorizontalOptions="EndAndExpand"
+                                BackgroundColor="{StaticResource SeaGreen}"
+                                CornerRadius="17">
+                                <Label
+                                    VerticalOptions="CenterAndExpand"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{local:Translate mygoal}"
+                                    VerticalTextAlignment="Center"
+                                    Style="{StaticResource Title}"
+                                    FontSize="12" />
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding CmdChangeGoal}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </Grid>
+                        <Grid
+                            Grid.Row="1"
+                            VerticalOptions="CenterAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="20" />
+                                <RowDefinition
+                                    Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid
+                                VerticalOptions="CenterAndExpand"
+                                Margin="8,0,100,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        Width="*" />
+                                    <ColumnDefinition
+                                        Width="*" />
+                                    <ColumnDefinition
+                                        Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Text="Weekly">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding CmdTrack}"
+                                            CommandParameter="{Static model:Tracking.Weekly}" />
+                                    </Label.GestureRecognizers>
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            TargetType="Label"
+                                            Binding="{Binding Track}"
+                                            Value="{Static model:Tracking.Weekly}">
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="{StaticResource SeaGreen}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label
+                                    x:Name="month"
+                                    Text="Monthly"
+                                    Grid.Column="1">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding CmdTrack}"
+                                            CommandParameter="{Static model:Tracking.Monthly}" />
+                                    </Label.GestureRecognizers>
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            TargetType="Label"
+                                            Binding="{Binding Track}"
+                                            Value="{Static model:Tracking.Monthly}">
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="{StaticResource SeaGreen}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label
+                                    x:Name="day"
+                                    Text="Daily"
+                                    Grid.Column="2">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding CmdTrack}"
+                                            CommandParameter="{Static model:Tracking.Daily}" />
+                                    </Label.GestureRecognizers>
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            TargetType="Label"
+                                            Binding="{Binding Track}"
+                                            Value="{Static model:Tracking.Daily}">
+                                            <Setter
+                                                Property="TextColor"
+                                                Value="{StaticResource SeaGreen}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                            <Grid
+                                CompressedLayout.IsHeadless="true"
+                                Grid.Row="1"
+                                VerticalOptions="CenterAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        Width="1.5*" />
+                                    <ColumnDefinition
+                                        Width="2*" />
+                                </Grid.ColumnDefinitions>
+                                <custom:CircleProgressBar />
+                                <StackLayout
+                                    CompressedLayout.IsHeadless="true"
+                                    Grid.Column="1"
+                                    VerticalOptions="CenterAndExpand">
+                                    <Grid
+                                        Margin="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition
+                                                Width="Auto" />
+                                            <ColumnDefinition
+                                                Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <forms:CachedImage
+                                            HeightRequest="42"
+                                            WidthRequest="42"
+                                            Source="TimeIcon.png">
+                                        </forms:CachedImage>
+                                        <StackLayout
+                                            CompressedLayout.IsHeadless="true"
+                                            Grid.Column="1"
+                                            VerticalOptions="EndAndExpand"
+                                            HorizontalOptions="FillAndExpand">
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span
+                                                            Text="{Binding Exercise.CompletedTime,StringFormat='{0}'}"
+                                                            Style="{StaticResource CompleteStyle}" />
+                                                        <Span
+                                                            Text="{Binding Exercise.GoalTime,StringFormat='/{0}'}"
+                                                            Style="{StaticResource GoalStyle}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <custom:CustomProgressBar
+                                                HorizontalOptions="FillAndExpand"
+                                                ProgressColor="{StaticResource SeaGreen}"
+                                                Progress="{Binding Exercise.CompletedTime}"
+                                                x:Name="progressBar" />
+                                        </StackLayout>
+                                    </Grid>
+                                    <Grid
+                                        CompressedLayout.IsHeadless="true"
+                                        Margin="8,0,8,8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition
+                                                Width="Auto" />
+                                            <ColumnDefinition
+                                                Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <forms:CachedImage
+                                            HeightRequest="42"
+                                            WidthRequest="42"
+                                            Source="KcalIcon.png">
+                                        </forms:CachedImage>
+                                        <StackLayout
+                                            CompressedLayout.IsHeadless="true"
+                                            Grid.Column="1"
+                                            VerticalOptions="EndAndExpand"
+                                            HorizontalOptions="FillAndExpand">
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span
+                                                            Text="{Binding Exercise.CompletedKcal,StringFormat='{0}kcal'}"
+                                                            Style="{StaticResource CompleteStyle}" />
+                                                        <Span
+                                                            Text="{Binding Exercise.GoalKcal,StringFormat='/{0}kcal'}"
+                                                            Style="{StaticResource GoalStyle}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <custom:CustomProgressBar
+                                                HorizontalOptions="FillAndExpand"
+                                                ProgressColor="{StaticResource SeaGreen}"
+                                                Progress="{Binding Exercise.CompletedKcal}"
+                                                x:Name="kcalProgress" />
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

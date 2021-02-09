@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<custom:XFCircleProgress
+    xmlns:custom="clr-namespace:HealthApp.Custom"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HealthApp.Custom.CircleProgressBar"
+    HeightRequest="120"
+    WidthRequest="120"
+    Maximun="100"
+    Minimun="0"
+    Value="47"
+    BackColor="LightGray"
+    ForeColor="{StaticResource SeaGreen}"
+    TextColor="#4D4B54"
+    BarHeight="20"
+    AnimationDuration="1000"
+    Text="47%"
+    TextSize="60"
+    VerticalOptions="CenterAndExpand"
+    HorizontalOptions="CenterAndExpand">
+</custom:XFCircleProgress>

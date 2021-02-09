@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="HealthApp.Views.Home.InputGoalPage"
+    xmlns:local="clr-namespace:HealthApp.Localization"
+    xmlns:custom="clr-namespace:HealthApp.Custom"
+    xmlns:converters="clr-namespace:HealthApp.Common.Converters"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundImageSource="BgInputIcon">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SelectedItemConverter x:Key="SelectConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="3.5*" />
+                <RowDefinition
+                    Height="6.5*" />
+            </Grid.RowDefinitions>
+            <Frame
+                HeightRequest="36"
+                WidthRequest="36"
+                Padding="2"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="StartAndExpand"
+                Margin="16,24"
+                CornerRadius="12">
+                <forms:CachedImage
+                    Source="BackIcon"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding CmdBack}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Label
+                Text="{local:Translate stay}"
+                VerticalOptions="EndAndExpand"
+                Margin="16"
+                Style="{StaticResource SloganStyle}"/>
+            <yummy:PancakeView
+                CornerRadius="35,35,0,0"
+                BackgroundColor="{StaticResource TitleColor}"
+                Grid.Row="1">
+
+                <StackLayout>
+                    <StackLayout
+                        Margin="16,16,8,16"
+                        Orientation="Horizontal">
+                        <Label
+                            Text="{local:Translate suggest}"
+                            Style="{StaticResource InputTitleStyle}"
+                            FontSize="20"
+                            VerticalOptions="CenterAndExpand" />
+                        <forms:CachedImage
+                            Margin="16,0"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Source="OptionIcon.png" />
+                    </StackLayout>
+                    <Frame
+                        Margin="16,0,16,8"
+                        Padding="16,0"
+                        CornerRadius="10"
+                        BackgroundColor="{StaticResource Background}"
+                        HeightRequest="150">
+                        <StackLayout>
+                            <Label
+                                Text="{local:Translate ibm}"
+                                Style="{StaticResource InputTitleStyle}" />
+                            <custom:CustomEntry
+                                PlaceHold="BMI Index"
+                                HeightRequest="50"
+                                VerticalOptions="CenterAndExpand" />
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Margin="16,0,16,16"
+                                VerticalOptions="EndAndExpand">
+                                <custom:ButtonInfo
+                                    Title="Height"
+                                    HeightRequest="30"
+                                    WidthRequest="80" />
+                                <custom:ButtonInfo
+                                    Title="Weight"
+                                    HeightRequest="30"
+                                    WidthRequest="80" />
+                                <custom:ButtonInfo
+                                    Title="Age"
+                                    HeightRequest="30"
+                                    WidthRequest="80" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        Padding="16,0"
+                        Margin="16,0"
+                        CornerRadius="10"
+                        BackgroundColor="{StaticResource Background}"
+                        HeightRequest="130">
+                        <StackLayout
+                            VerticalOptions="CenterAndExpand">
+                            <Label
+                                Text="Your Daily Acitvity"
+                                Style="{StaticResource InputTitleStyle}" />
+                            <custom:CustomEntry
+                                PlaceHold="Today"
+                                ImageSourceEntry="DropIcon"
+                                HeightRequest="50" />
+                        </StackLayout>
+                    </Frame>
+                    <Label
+                        Text="Days you'll be excersising"
+                        VerticalOptions="Center"
+                        Style="{StaticResource InputTitleStyle}"
+                        Margin="16,0" />
+                    <ScrollView
+                        Orientation="Horizontal"
+                        HorizontalScrollBarVisibility="Never"
+                        Margin="8">
+                        <StackLayout
+                            x:Name="listDate"
+                            BindableLayout.ItemsSource="{Binding ItemDaily}"
+                            Orientation="Horizontal">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Margin="8"
+                                        HeightRequest="40"
+                                        WidthRequest="62"
+                                        Padding="0"
+                                        CornerRadius="17"
+                                        BackgroundColor="{StaticResource SeaGreen}"
+                                        Opacity="{Binding SelectedDate, Converter={StaticResource SelectConverter}}">
+                                        <Label
+                                            TextColor="White"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Name}"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="CenterAndExpand" />
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={Reference listDate},Path=BindingContext.CmdSelectDateEx}"
+                                                CommandParameter="{Binding .}" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </yummy:PancakeView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

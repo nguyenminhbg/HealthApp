@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthApp.Common.Styles.Colors">
+    <Color
+        x:Key="SeaGreen">#089BAB</Color>
+    <Color x:Key="Background">#EFF7F9</Color>
+    <Color x:Key="TitleColor">#FFFFFF</Color>
+    <Color x:Key="CircleBg">#EBEFF0</Color>
+    <Color x:Key="RateColor">#4D4B54</Color>
+    <Color
+        x:Key="GoalColor">#BDC1C2</Color>
+    <Color x:Key="BlackColor">#000000</Color>
+</ResourceDictionary>
